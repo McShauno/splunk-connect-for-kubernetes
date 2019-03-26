@@ -72,12 +72,8 @@ Rules:
 {{- end -}}
 
 {{/*
-Create service account image pull secrets if needed.
+Create the image name
 */}}
-{{- define "splunk-kubernetes-objects.serviceAccountImagePullSecrets" -}}
-{{- if .Values.serviceAccount.usePullSecrets -}}
-    {{ default (include "splunk-kubernetes-objects.fullname" .) .Values.serviceAccount.pullSecrets }}
-{{- else -}}
-    {{ default "default" .Values.serviceAccount.pullSecrets }}
-{{- end -}}
+{{- define "splunk-kubernetes-objects.image" -}}
+{{- printf "%s/%s:%s" .Values.image.registry .Values.image.name .Values.image.tag -}}
 {{- end -}}

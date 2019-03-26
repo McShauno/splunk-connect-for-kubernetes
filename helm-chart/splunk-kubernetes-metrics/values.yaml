@@ -41,7 +41,7 @@ serviceAccount:
   # The name of the ServiceAccount to use.
   # If not set and create is true, a name is generated using the fullname template
   name:
-  imagePullSecrets:
+  usePullSecrets: false
 
 
 # = Splunk HEC Connection =
@@ -75,13 +75,21 @@ splunk:
 
 
 image:
-  name: splunk/k8s-metrics:1.1.0
+  registry: docker.io
+  name: splunk/k8s-metrics
+  tag: 1.1.0
   pullPolicy: Always
+  usePullSecret: false
+  pullsecretName: 
 
 
 imageAgg:
-  name: splunk/k8s-metrics-aggr:1.1.0
+  registry: docker.io
+  name: splunk/k8s-metrics-aggr
+  tag: 1.1.0
   pullPolicy: Always
+  usePullSecret: false
+  pullsecretName: 
 
 
 resources:
