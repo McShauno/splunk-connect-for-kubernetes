@@ -41,3 +41,14 @@ Create the name of the service account to use
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Create service account image pull secrets if needed.
+*/}}
+{{- define "splunk-kubernetes-metrics.serviceAccountImagePullSecrets" -}}
+{{- if .Values.serviceAccount.usePullSecrets -}}
+    {{ default (include "splunk-kubernetes-metrics.fullname" .) .Values.serviceAccount.pullSecrets }}
+{{- else -}}
+    {{ default "default" .Values.serviceAccount.pullSecrets }}
+{{- end -}}
+{{- end -}}

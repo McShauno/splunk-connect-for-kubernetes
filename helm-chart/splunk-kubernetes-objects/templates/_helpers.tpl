@@ -70,3 +70,14 @@ Rules:
 {{- $mem -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Create service account image pull secrets if needed.
+*/}}
+{{- define "splunk-kubernetes-objects.serviceAccountImagePullSecrets" -}}
+{{- if .Values.serviceAccount.usePullSecrets -}}
+    {{ default (include "splunk-kubernetes-objects.fullname" .) .Values.serviceAccount.pullSecrets }}
+{{- else -}}
+    {{ default "default" .Values.serviceAccount.pullSecrets }}
+{{- end -}}
+{{- end -}}
